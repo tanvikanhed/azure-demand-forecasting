@@ -1,65 +1,39 @@
-# Azure Demand Forecasting & Customer Growth Analysis
+# Azure Demand Forecasting & Customer Growth Analysis  
 
-## 📌 Project Overview
-This project analyzes Azure service demand data over a 12–24 month period across multiple regions.  
-The objective is to clean, validate, and prepare the dataset for time-series forecasting and enterprise capacity planning.
+## Project Overview  
+This project analyzes Azure Compute and Storage demand data to prepare it for forecasting and customer growth modeling.  
+Milestone 1 focuses on data cleaning, validation, and exploratory data analysis (EDA).
 
-This is **Milestone 1** of the project, focusing on data collection, preprocessing, and visualization.
-## Dataset Description
-The dataset contains the following features:
+## Dataset Summary  
 
-- timestamp – Date of record (daily granularity)
-- region – Azure region (US-East, US-West, India-South)
-- service_type – Compute or Storage
-- usage_units – Resource demand (cores / GB)
-- capacity_allocated – Provisioned infrastructure capacity
-- cost_usd – Cost associated with usage
-- availability_pct – Service availability percentage
-- customer_growth_rate – Monthly growth rate of active customers (external factor)
+**Time Span:** Jan 2023 – Dec 2024 (Daily data)  
+**Regions:** East US, West Europe, Central India, Southeast Asia  
+**Services:** Compute, Storage  
 
-Time range: 12–24 months  
-Total records: ~3000 rows  
-
-## Data Cleaning & Preparation Steps
-The following preprocessing steps were performed:
-
-- Standardized column names
-- Converted `timestamp` to datetime format
-- Sorted dataset for time-series consistency
-- Removed duplicate records
-- Handled missing values:
-  - Interpolated `usage_units`
-  - Recomputed or filled `cost_usd` where necessary
-  - Forward-filled `availability_pct`
-  - Interpolated `customer_growth_rate`
-  - Validated dataset consistency and structure
-  - Created clean time-series visualizations
-    
-## Visualizations
-- Region-wise usage trend over time
-- Time-series demand trend analysis
-- Capacity vs Usage comparison
+### Features
+- `timestamp` – Daily date  
+- `region` – Azure region  
+- `service_type` – Compute / Storage  
+- `demand_units` – Workload demand  
+- `capacity_allocated` – Provisioned capacity  
+- `cost_usd` – Operational cost  
+- `availability_pct` – SLA availability  
+- `customer_growth_rate` – Business growth factor  
+- `enterprise_it_spending_index` – Economic indicator
   
-## Tools & Technologies Used
-- Python
-- Pandas
-- NumPy
-- Matplotlib
-- Google Colab
-  
-##  Business Relevance
-This dataset enables:
+## Data Preparation  
+- Converted timestamps and sorted chronologically  
+- Standardized region and service values  
+- Removed duplicates  
+- Handled ~3% missing values using interpolation, recalculation, and forward fill  
+- Performed validation checks  
 
-- Demand forecasting
-- Capacity planning optimization
-- Cost trend analysis
-- Understanding the impact of customer growth on infrastructure demand
-  
-## How to Run the Project
-1. Clone the repository  
-2. Open the notebook in Jupyter or Google Colab  
-3. Run all cells sequentially
-   
-## Project Status
-Milestone 1 – Data Collection & Preparation – Completed  
-Ready for Forecasting Model Development (Milestone 2)
+## EDA Performed  
+- Monthly Average Demand Trend  
+- Region-wise Demand Trend  
+- Service Type Comparison  
+
+## Files  
+- `azure_demand_dataset.csv` – Raw dataset  
+- `azure_demand_cleaned_v2.csv` – Cleaned dataset  
+
