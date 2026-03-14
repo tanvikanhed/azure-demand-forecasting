@@ -130,3 +130,29 @@ Azure-Demand-Forecasting/
   
 ##  Objective
 To build a scalable Azure demand forecasting system that supports capacity planning, cost optimization, and customer growth analysis.
+
+# Azure Demand Forecasting & Capacity Optimization System
+
+## Milestone 3 – Machine Learning Model Development
+
+This milestone focuses on building and evaluating forecasting models to predict Azure Compute and Storage demand.
+
+### Models Implemented
+- Baseline Forecast Model
+- ARIMA Time Series Model
+- XGBoost Machine Learning Model
+
+### Evaluation Metrics
+- MAE (Mean Absolute Error)
+- RMSE (Root Mean Squared Error)
+
+### Model Comparison
+
+| Model | MAE | RMSE |
+|------|------|------|
+| Baseline | 198.11 | 240.63 |
+| ARIMA | 195.37 | 240.80 |
+| XGBoost | 80.29 | 98.83 |
+
+### Result
+XGBoost achieved the lowest error and was selected as the final forecasting model for predicting Azure demand.
