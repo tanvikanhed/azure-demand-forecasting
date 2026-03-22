@@ -1,158 +1,122 @@
 # Azure Demand Forecasting & Customer Growth Analysis
-##  Project Overview
-This project analyzes Azure Compute and Storage demand data to prepare it for forecasting and customer growth modeling.
 
-**The project is divided into milestones:**
-- **Milestone 1:** Data Cleaning, Validation, and Exploratory Data Analysis (EDA)
-- **Milestone 2:** Feature Engineering and Model-Ready Dataset Preparation
-- **Milestone 3 (Upcoming):** Demand Forecasting Model & Deployment
-  
-##  Dataset Summary
-- **Time Span:** January 2023 – December 2024 (Daily data)
-  
-**Regions:**
-- East US
-- West Europe
-- Central India
-- Southeast Asia
-  
-**Services:**
-- Compute
-- Storage
- 
-- **Granularity:** Daily region-service level records
-##  Original Features
-- `timestamp` – Daily date
-- `region` – Azure region
-- `service_type` – Compute / Storage
-- `demand_units` – Workload demand (Target Variable)
-- `capacity_allocated` – Provisioned capacity
-- `cost_usd` – Operational cost
-- `availability_pct` – SLA availability
-- `customer_growth_rate` – Business growth factor
-- `enterprise_it_spending_index` – Economic indicator
-  
-## Milestone 1 – Data Cleaning & EDA
-###  Data Preparation
-- Converted `timestamp` to datetime
-- Sorted data chronologically
-- Standardized region and service values
-- Removed duplicates
-- Handled ~3% missing values using:
-  - Interpolation
-  - Forward fill
-  - Logical recalculation
-- Performed validation checks
-  
-###  Exploratory Data Analysis
-- Monthly average demand trend
-- Region-wise demand comparison
-- Service type demand comparison
-- Correlation matrix for numerical features
-- Trend and distribution visualization
-  
-Cleaned dataset saved as:
-`data/azure_ts_24m_clean.csv`
+This repository contains the end-to-end project on **Azure Compute and Storage Demand Forecasting** and **Customer Growth Analysis**, covering all milestones (M1 to M4). The project includes data preparation, exploratory analysis, feature engineering, model development, deployment, and dashboard visualization.
 
-## Milestone 2 – Feature Engineering
+---
 
-**Milestone 2 prepares the dataset for machine learning and forecasting.**
+## Table of Contents
+1. [Project Overview](#project-overview)
+2. [Milestones](#milestones)
+   - [Milestone 1 (M1) – Data Cleaning & EDA](#milestone-1-m1---data-cleaning--eda)
+   - [Milestone 2 (M2) – Feature Engineering & Model Preparation](#milestone-2-m2---feature-engineering--model-preparation)
+   - [Milestone 3 (M3) – Demand Forecasting Model](#milestone-3-m3---demand-forecasting-model)
+   - [Milestone 4 (M4) – Dashboard & Deployment](#milestone-4-m4---dashboard--deployment)
+3. [Project Structure](#project-structure)
+4. [Deployment & Links](#deployment--links)
+5. [Technologies Used](#technologies-used)
+6. [How to Run](#how-to-run)
+7. [License](#license)
 
-###  Time-Based Features
-Extracted from `timestamp`:
-- `year`
-- `month`
-- `day`
-- `day_of_week`
-- `is_weekend`
-  
-###  Lag Features (Time Dependency)
-Created region-service group-based lag features:
-- `lag_1` – Previous day demand
-- `lag_7` – Previous week demand
-  
-###  Rolling Feature
-- `rolling_mean_7` – 7-day moving average demand
-  
-###  Demand Spike Detection
-Created `demand_spike` column:
-- Value = 1 if demand > (mean + 1.5 × std)
-- Value = 0 otherwise
-Used to identify unusual demand surges.
+---
 
-###  Encoding & Final Processing
-- One-hot encoded:
-  - `region`
-  - `service_type`
-- Removed non-numeric columns
-- Converted boolean columns to integers
-- Removed lag-induced null rows
-- Verified no missing values remain
-  
-##  Final Model-Ready Dataset
-- Rows: 1048
-- Columns: 18
-- Fully numeric
-- No missing values
-- Ready for regression modeling
-Saved as:
-`data/Milestone2_ModelReady.csv`
+## Project Overview
+This project aims to analyze Azure Compute and Storage demand data to:  
+- Forecast future demand at region and product level  
+- Model customer growth patterns  
+- Build an interactive dashboard for visualization  
+- Automate deployment with real-time monitoring  
 
-##  Repository Structure
-```
-Azure-Demand-Forecasting/
+---
+
+## Milestones
+
+### Milestone 1 (M1) - Data Cleaning & EDA
+- Collected Azure Compute & Storage demand dataset  
+- Performed **data cleaning**: removed nulls, duplicates, invalid rows  
+- Exploratory Data Analysis (EDA):  
+  - Trend analysis  
+  - Region-wise demand patterns  
+  - Seasonal patterns in usage  
+- Output: Cleaned dataset ready for modeling
+
+**Files/Code:**  
+- `M1_Data_Cleaning.ipynb`  
+- `EDA_Analysis.ipynb`  
+
+---
+
+### Milestone 2 (M2) - Feature Engineering & Model Preparation
+- Engineered features for forecasting model:
+  - Lag features  
+  - Moving averages  
+  - Time-based features (day, month, quarter)  
+- Prepared model-ready datasets  
+- Validated features and handled multicollinearity  
+
+**Files/Code:**  
+- `M2_Feature_Engineering.ipynb`  
+- `Model_Preparation.ipynb`  
+
+---
+
+### Milestone 3 (M3) - Demand Forecasting Model
+- Built and trained forecasting model:  
+  - Algorithms used: **Prophet / ARIMA / LSTM (as applicable)**  
+  - Trained on historical demand data  
+  - Evaluated model using RMSE, MAPE metrics  
+- Generated forecasts for future periods  
+- Saved model for deployment
+
+**Files/Code:**  
+- `M3_Model_Training.ipynb`  
+- `Forecasting_Model.pkl`  
+
+---
+
+### Milestone 4 (M4) - Dashboard & Deployment
+- Developed interactive **Power BI / Tableau** dashboard:  
+  - Region-wise and product-wise demand trends  
+  - Forecast visualization  
+  - Key metrics and KPIs  
+- Integrated automated model deployment:  
+  - Scheduled forecasting using **Python scheduler / Task Scheduler**  
+  - Real-time monitoring for errors and prediction logs  
+- Automated CSV export and dashboard updates  
+
+**Files/Code:**  
+- `M4_Dashboard_Development.ipynb`  
+- `Dashboard.pbix`  
+
+---
+
+## Project Structure
+project-root/
 │
-├── data/
-│   ├── azure_demand_dataset.csv
-│   ├── azure_ts_24m_clean.csv
-│   └── Milestone2_ModelReady.csv
-│
-├── notebooks/
-│   ├── AzureFile.ipynb
-│   └── Azure_milestone2.ipynb
-│
-├── README.md
-└── MIT license.txt
-```
-##  Technologies Used
-- Python
-- Pandas
-- NumPy
-- Matplotlib
-- Seaborn
-- Scikit-learn
-  
-##  Next Steps (Milestone 3)
-- Train demand forecasting regression model
-- Evaluate performance metrics
-- Build prediction pipeline
-- Deploy forecasting solution
-  
-##  Objective
-To build a scalable Azure demand forecasting system that supports capacity planning, cost optimization, and customer growth analysis.
+├─ M1_Data_Cleaning.ipynb
+├─ EDA_Analysis.ipynb
+├─ M2_Feature_Engineering.ipynb
+├─ Model_Preparation.ipynb
+├─ M3_Model_Training.ipynb
+├─ Forecasting_Model.pkl
+├─ M4_Dashboard_Development.ipynb
+├─ Dashboard.pbix
+├─ README.md
+└─ requirements.txt
 
-# Azure Demand Forecasting & Capacity Optimization System
 
-## Milestone 3 – Machine Learning Model Development
+---
 
-This milestone focuses on building and evaluating forecasting models to predict Azure Compute and Storage demand.
+## Deployment & Links
+- **Deployed Dashboard / Public Link:** https://azure-demand-forecasting-edw4al6ddysfglws5b8s2a.streamlit.app/  
 
-### Models Implemented
-- Baseline Forecast Model
-- ARIMA Time Series Model
-- XGBoost Machine Learning Model
 
-### Evaluation Metrics
-- MAE (Mean Absolute Error)
-- RMSE (Root Mean Squared Error)
+## Technologies Used
+- Python (pandas, numpy, scikit-learn, statsmodels, prophet, matplotlib, seaborn)  
+- Power BI / Tableau  
+- CSV, Pickle for data/model storage  
+- Scheduler / Automation scripts for deployment  
 
-### Model Comparison
 
-| Model | MAE | RMSE |
-|------|------|------|
-| Baseline | 198.11 | 240.63 |
-| ARIMA | 195.37 | 240.80 |
-| XGBoost | 80.29 | 98.83 |
+.  
 
-### Result
-XGBoost achieved the lowest error and was selected as the final forecasting model for predicting Azure demand.
+
