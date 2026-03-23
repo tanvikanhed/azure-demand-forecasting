@@ -14,8 +14,7 @@ This repository contains the end-to-end project on **Azure Compute and Storage D
 3. [Project Structure](#project-structure)
 4. [Deployment & Links](#deployment--links)
 5. [Technologies Used](#technologies-used)
-6. [How to Run](#how-to-run)
-7. [License](#license)
+6. [License](#license)
 
 ---
 
@@ -103,12 +102,9 @@ project-root/
 ├─ README.md
 └─ requirements.txt
 
-
----
-
 ## Deployment & Links
 - **Deployed Dashboard / Public Link:** https://azure-demand-forecasting-edw4al6ddysfglws5b8s2a.streamlit.app/  
-- **Model Download Link (Optional):** 
+- **Model Download Link (Optional):** https://github.com/tanvikanhed/azure-demand-forecasting/blob/main/model%20(1).pkl
 
 ## Technologies Used
 - Python (pandas, numpy, scikit-learn, statsmodels, prophet, matplotlib, seaborn)  
@@ -116,7 +112,19 @@ project-root/
 - CSV, Pickle for data/model storage  
 - Scheduler / Automation scripts for deployment  
 
+## References
+- Azure public datasets
+- XGBoost documentation: https://xgboost.readthedocs.io/
+- Python libraries: pandas, numpy, scikit-learn
 
-.  
+  ## Notes
+- Download `model.pkl` from the link above to use the trained XGBoost model.
+- Run the notebooks in order: M1 → M2 → M3 → M4.
+- For dashboard visualization, open `M4_Dashboard_Development.ipynb` or Power BI file `Dashboard.pbix`.
+- All scripts were tested in Python 3.10 and require the libraries listed in `requirements.txt`.
 
+  ## License
+This project is licensed under the MIT License.
+
+----
 
