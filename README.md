@@ -1,90 +1,79 @@
 # Azure Demand Forecasting & Customer Growth Analysis
 
-This repository contains the end-to-end project on **Azure Compute and Storage Demand Forecasting** and **Customer Growth Analysis**, covering all milestones (M1 to M4). The project includes data preparation, exploratory analysis, feature engineering, model development, deployment, and dashboard visualization.
-
----
-
-## Table of Contents
-1. [Project Overview](#project-overview)
-2. [Milestones](#milestones)
-   - [Milestone 1 (M1) – Data Cleaning & EDA](#milestone-1-m1---data-cleaning--eda)
-   - [Milestone 2 (M2) – Feature Engineering & Model Preparation](#milestone-2-m2---feature-engineering--model-preparation)
-   - [Milestone 3 (M3) – Demand Forecasting Model](#milestone-3-m3---demand-forecasting-model)
-   - [Milestone 4 (M4) – Dashboard & Deployment](#milestone-4-m4---dashboard--deployment)
-3. [Project Structure](#project-structure)
-4. [Deployment & Links](#deployment--links)
-5. [Technologies Used](#technologies-used)
-6. [License](#license)
+This project focuses on forecasting Azure Compute and Storage demand using Machine Learning. It covers the complete pipeline from data preprocessing to model deployment and visualization.
 
 ---
 
 ## Project Overview
-This project aims to analyze Azure Compute and Storage demand data to:  
-- Forecast future demand at region and product level  
-- Model customer growth patterns  
-- Build an interactive dashboard for visualization  
-- Automate deployment with real-time monitoring  
+
+The goal of this project is to:
+- Predict future demand using historical data
+- Analyze demand trends across regions and services
+- Build a complete ML pipeline with batch and real-time predictions
+- Visualize predictions for decision-making
 
 ---
 
 ## Milestones
 
-### Milestone 1 (M1) - Data Cleaning & EDA
-- Collected Azure Compute & Storage demand dataset  
-- Performed **data cleaning**: removed nulls, duplicates, invalid rows  
-- Exploratory Data Analysis (EDA):  
-  - Trend analysis  
-  - Region-wise demand patterns  
-  - Seasonal patterns in usage  
-- Output: Cleaned dataset ready for modeling
-
-**Files/Code:**  
-- `M1_Data_Cleaning.ipynb`  
-- `EDA_Analysis.ipynb`  
+### Milestone 1 (M1) – Data Cleaning & EDA
+- Cleaned raw dataset (handled null values, duplicates)
+- Performed Exploratory Data Analysis (EDA)
+- Identified trends and patterns in demand
 
 ---
 
-### Milestone 2 (M2) - Feature Engineering & Model Preparation
-- Engineered features for forecasting model:
-  - Lag features  
-  - Moving averages  
-  - Time-based features (day, month, quarter)  
-- Prepared model-ready datasets  
-- Validated features and handled multicollinearity  
-
-**Files/Code:**  
-- `M2_Feature_Engineering.ipynb`  
-- `Model_Preparation.ipynb`  
+### Milestone 2 (M2) – Feature Engineering
+- Created model-ready dataset
+- Added time-based and derived features
+- Final dataset: `Milestone2_ModelReady.csv`
 
 ---
 
-### Milestone 3 (M3) - Demand Forecasting Model
-- Built and trained forecasting model:  
-  - Algorithms used: **Prophet / ARIMA / LSTM (as applicable)**  
-  - Trained on historical demand data  
-  - Evaluated model using RMSE, MAPE metrics  
-- Generated forecasts for future periods  
-- Saved model for deployment
-
-**Files/Code:**  
-- `M3_Model_Training.ipynb`  
-- `Forecasting_Model.pkl`  
+### Milestone 3 (M3) – Model Development
+- Trained **XGBoost Regressor model**
+- Performed train-test split
+- Evaluated model using:
+  - MAE (Mean Absolute Error)
+  - RMSE (Root Mean Squared Error)
+- Generated predictions
+- Saved trained model as `model.pkl`
 
 ---
 
-### Milestone 4 (M4) - Dashboard & Deployment
-- Developed interactive **Power BI / Tableau** dashboard:  
-  - Region-wise and product-wise demand trends  
-  - Forecast visualization  
-  - Key metrics and KPIs  
-- Integrated automated model deployment:  
-  - Scheduled forecasting using **Python scheduler / Task Scheduler**  
-  - Real-time monitoring for errors and prediction logs  
-- Automated CSV export and dashboard updates  
+### Milestone 4 (M4) – Deployment & Visualization
 
-**Files/Code:**  
-- `M4_Dashboard_Development.ipynb`  
-- `Dashboard.pbix`  
+#### 🔹 Batch Prediction Pipeline
+- Input: `new_data.csv`
+- Output: `forecast_output.csv`
+- Generates predictions for multiple records
+
+#### 🔹 FastAPI (Real-Time Prediction)
+- Built API endpoint:
+- POST /predict
+-  Takes input data and returns predicted demand
+- Enables real-time forecasting
+
+#### 🔹 Streamlit Dashboard
+- Built interactive dashboard using Streamlit
+- Visualizations include:
+- Actual vs Predicted demand (time-series)
+- Demand trends
+- Region/service-based analysis
+
+---
+
+## Data Flow
+new_data.csv
+↓
+Batch Prediction Script / FastAPI API
+↓
+forecast_output.csv
+↓
+Streamlit Dashboard
+↓
+Decision Making
+
 
 ---
 
@@ -92,39 +81,57 @@ This project aims to analyze Azure Compute and Storage demand data to:
 project-root/
 │
 ├─ M1_Data_Cleaning.ipynb
-├─ EDA_Analysis.ipynb
 ├─ M2_Feature_Engineering.ipynb
-├─ Model_Preparation.ipynb
 ├─ M3_Model_Training.ipynb
-├─ Forecasting_Model.pkl
-├─ M4_Dashboard_Development.ipynb
-├─ Dashboard.pbix
+├─ model.pkl
+├─ forecast_output.csv
+├─ app.py # FastAPI app
+├─ streamlit_app.py # Streamlit dashboard
 ├─ README.md
 └─ requirements.txt
 
+
+---
+
+## Model Download
+
 ## Deployment & Links
-- **Deployed Dashboard / Public Link:** https://azure-demand-forecasting-edw4al6ddysfglws5b8s2a.streamlit.app/  
-- **Model Download Link (Optional):** https://github.com/tanvikanhed/azure-demand-forecasting/blob/main/model%20(1).pkl
+- **Deployed Dashboard:** https://azure-demand-forecasting-edw4al6ddysfglws5b8s2a.streamlit.app/  
+- **Model Download Link :** https://github.com/tanvikanhed/azure-demand-forecasting/blob/main/model%20(1).pkl
+---
 
 ## Technologies Used
-- Python (pandas, numpy, scikit-learn, statsmodels, prophet, matplotlib, seaborn)  
-- Power BI / Tableau  
-- CSV, Pickle for data/model storage  
-- Scheduler / Automation scripts for deployment  
 
-## References
-- Azure public datasets
-- XGBoost documentation: https://xgboost.readthedocs.io/
-- Python libraries: pandas, numpy, scikit-learn
+- Python
+- Pandas, NumPy
+- Scikit-learn
+- XGBoost
+- FastAPI (for API)
+- Streamlit (for dashboard)
+- Pickle (for model saving)
 
-  ## Notes
-- Download `model.pkl` from the link above to use the trained XGBoost model.
-- Run the notebooks in order: M1 → M2 → M3 → M4.
-- For dashboard visualization, open `M4_Dashboard_Development.ipynb` or Power BI file `Dashboard.pbix`.
-- All scripts were tested in Python 3.10 and require the libraries listed in `requirements.txt`.
+---
 
-  ## License
-This project is licensed under the MIT License.
+## How to Run
 
-----
+### 1. Install dependencies
+pip install -r requirements.txt
+
+### 2. Run FastAPI server
+uvicorn app:app --reload
+
+### 3. Run Streamlit dashboard
+streamlit run streamlit_app.py
+
+
+---
+
+## Key Concepts
+
+- **Batch Prediction:** Processes multiple inputs from CSV at once  
+- **Real-Time Prediction:** API-based prediction using FastAPI  
+- **Model Persistence:** Saved using `.pkl` for reuse  
+- **Visualization:** Built using Streamlit  
+
+---
 
