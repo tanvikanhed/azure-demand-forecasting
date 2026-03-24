@@ -65,13 +65,21 @@ The goal of this project is to:
 
 ## Data Flow
 new_data.csv
+
 ↓
+
 Batch Prediction Script / FastAPI API
+
 ↓
+
 forecast_output.csv
+
 ↓
+
 Streamlit Dashboard
+
 ↓
+
 Decision Making
 
 
