@@ -88,15 +88,25 @@ Decision Making
 ## Project Structure
 project-root/
 │
+
 ├─ M1_Data_Cleaning.ipynb
+
 ├─ M2_Feature_Engineering.ipynb
+
 ├─ M3_Model_Training.ipynb
+
 ├─ model.pkl
+
 ├─ forecast_output.csv
+
 ├─ app.py # FastAPI app
+
 ├─ streamlit_app.py # Streamlit dashboard
+
 ├─ README.md
+
 └─ requirements.txt
+
 
 
 ---
